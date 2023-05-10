@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <!--为了防止进程退出时，内存中的数据丢失，请加上此选项-->
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+    <property name="LOG_HOME" value="E:/code/logs/springboot_temple" />
+    <property name="LOG_NAME_BEGIN" value="springboot_temple" />
+    <property name="moduleName" value="springboot-temple" />
+    <property name="maxFileSize" value="100MB" />
+    <property name="totalSizeCap" value="2GB" />
+    <property name="MaxHistory" value="30" />
+    <!-- 彩色日志格式 -->
+    <property name="COLOUR_LOG_PATTERN"
+              value="%magenta(%d{yyyy-MM-dd HH:mm:ss.SSS}) %cyan([TRACE_ID:%X{TRACE_ID}])  %blue([%thread]) %highlight(%-5level) %green(%logger) - %msg%n"/>
+    <!-- Console 输出设置 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${COLOUR_LOG_PATTERN}</pattern>-->
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    <!-- 按照每天生成日志文件 -->
+    <!-- 所有级别日志 appender  -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--按大小+时间的策略保存日志-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <fileNamePattern>${LOG_HOME}/${LOG_NAME_BEGIN}-all-%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <!--每100m分一个文件-->
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <!--总大小不超过2G-->
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <!--日志文件保留天数-->
+            <MaxHistory>${MaxHistory}</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>${COLOUR_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- warn日志 appender  -->
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${LOG_NAME_BEGIN}-info-%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <!--每100m分一个文件-->
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <!--总大小不超过2G-->
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <!--日志文件保留天数-->
+            <MaxHistory>${MaxHistory}</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${COLOUR_LOG_PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印info日志 -->
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <!-- debug日志 appender  -->
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${LOG_NAME_BEGIN}-debug-%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <!--每100m分一个文件-->
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <!--总大小不超过2G-->
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <!--日志文件保留天数-->
+            <MaxHistory>${MaxHistory}</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${COLOUR_LOG_PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印debug日志 -->
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- error日志 appender  -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${LOG_NAME_BEGIN}-error-%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <!--每100m分一个文件-->
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <!--总大小不超过2G-->
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <!--日志文件保留天数-->
+            <MaxHistory>${MaxHistory}</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${COLOUR_LOG_PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印error日志 -->
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- warn日志 appender  -->
+    <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${LOG_NAME_BEGIN}-warn-%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <!--每100m分一个文件-->
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <!--总大小不超过2G-->
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <!--日志文件保留天数-->
+            <MaxHistory>${MaxHistory}</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${COLOUR_LOG_PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印warn日志 -->
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+
+    <!-- 日志输出级别 -->
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="ERROR" />
+        <appender-ref ref="DEBUG" />
+        <appender-ref ref="INFO" />
+        <appender-ref ref="WARN" />
+    </root>
+</configuration>

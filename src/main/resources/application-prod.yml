@@ -1,0 +1,27 @@
+server:
+  port: 8382
+
+#配置文件信息加密随机数 测试时无需修改
+thread-pool:
+  max_pool_size: 50
+
+#日志配置 无特殊需求无需更改
+logging:
+  config: classpath:logback.xml
+  level:
+    root: debug
+    javax.activation: info
+    org.apache.catalina: INFO
+    org.apache.commons.beanutils.converters: INFO
+    org.apache.coyote.http11.Http11Processor: INFO
+    org.apache.http: INFO
+    org.apache.kafka: INFO
+    org.apache.tomcat: INFO
+    org.hibernate: INFO
+    org.hibernate.event.internal: warn
+    org.springframework: INFO
+    org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor: DEBUG
+    sun.rmi: INFO
+    springfox.documentation: INFO
+    org.springframework.web.servlet.DispatcherServlet: debug
+    org.apache.catalina.authenticator.AuthenticatorBase: debug
